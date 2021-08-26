@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Data;
 
+//git 테스트
 @Data
 public class Ask {
 	private int acode;
