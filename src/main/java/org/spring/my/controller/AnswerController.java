@@ -38,7 +38,7 @@ public class AnswerController {
 		
 		return "ok";
 	}
-	
+	//
 	//답글 조회
 	//@PathVariable: URL경로에 변수를 넣어주는 것
 	@RequestMapping(value = "/list/{acode}", method = RequestMethod.GET)
