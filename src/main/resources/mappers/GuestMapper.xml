@@ -24,9 +24,8 @@ where email = #{email}
 <!-- 	select * from guest
 	where userid = #{userid} -->
 	
-		select g.userid,g.passwd,g.username,g.birth,g.email,g.phone,g.zip,g.addr1,g.addr2,gr.gcode,g.point,g.regdate
-		FROM guest g inner join grade gr on (g.gcode = gr.gcode)
-		where g.userid = #{userid}
+		select userid,passwd,username,birth,email,phone,zip,addr1,addr2,regdate FROM guest
+		where userid = #{userid}
 	
 	</select>
 	

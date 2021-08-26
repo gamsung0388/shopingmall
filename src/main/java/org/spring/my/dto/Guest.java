@@ -14,8 +14,6 @@ public class Guest {
 	private String zip;
 	private String addr1;
 	private String addr2;
-	private String gcode;
-	private int point;
 	private String regdate;
 	private String modifydate;
 

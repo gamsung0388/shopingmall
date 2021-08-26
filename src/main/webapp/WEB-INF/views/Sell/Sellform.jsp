@@ -137,8 +137,8 @@ table th{
 				type:'delete',
 				dataType:'text',
 				success: function(data) {
-					console.log(data);
-					alert(data);
+					console.log('delete');
+					alert('전체비우기');
 					//값이 없으므로 바로 함수 실행
 					emptysellbox(0);
 				},
@@ -158,8 +158,8 @@ table th{
 				type:'delete',
 				dataType:'text',
 				success: function(data) {
-					console.log(data);
-					alert(data);
+					console.log('삭제');
+					alert('삭제');
 					$('tr').remove('#sellimpo'+pcode);
 					//삭제 후 값이 없을 때 함수 실행
 					if(${sellBoxmap.count==0}){
@@ -177,7 +177,6 @@ table th{
 			//하나의 상품만 가지고 결제폼 이동
 			e.preventDefault();
 			var sbcode = $(this).val();
-			alert(sbcode);
 			location.href='${path}/sellbox/order?sbcode='+sbcode;
 		});
 		//모든 상품 주문

@@ -75,13 +75,13 @@ button:hover {
 	box-shadow: rgba(30, 22, 54, 0.7);
 } */
 /*pay 버튼*/
-.paybtn1{
+#paybtn1{
 	width: 120;
 	height: 50;
 	border: none;
 	background: white;
 }
-.paybtn2{
+#paybtn2{
 	width: 120;
 	height: 50;
 	margin-left: 100;
@@ -89,14 +89,14 @@ button:hover {
 	border: none;
 	background: white;
 }
-.paybtn3{
+#paybtn3{
 	width: 120;
 	height: 50;
 	margin-left: 100;
 	border: none;
 	background: white;
 }
-.paybtn4{
+#paybtn4{
 	width: 120;
 	height: 50;
 	margin-left: 100;
@@ -177,7 +177,20 @@ function cashyesno() {
 			e.preventDefault();
 			goPopup(); //주소 팝업 띄우기
 		})
-		//현금영수증 체크시 번호칸 나오게 
+		$('#paybtn1').click(function() {
+			e.preventDefault();
+			var orderagree=$('input:checkbox[id="#orderagree"]').val();
+			console.log(orderagree);
+			var cashyn = $('.cashyn').val();
+			if(orderagree==false){
+				alert('결제동의확인서 체크');
+			}else if(cashyn=''){
+				alert('현금영수증여부 체크');
+			}else{
+				$('#frmOrderAdd').submit();
+			}
+		})
+		
 	})
 </script>
 <title>결제폼</title>
@@ -271,7 +284,10 @@ function cashyesno() {
 			<td>현금영수증 여부</td>
 		</tr>
 		<tr>
-			<td><input type="radio" name="cashyn" id="cashyes" onchange="cashyesno()">한다 <input type="radio" name="cashyn" id="cashno" onchange="cashyesno()">안한다</td>
+			<td>
+				<input type="radio" name="cashyn" class="cashyn" id="cashyes" onchange="cashyesno()">한다 
+				<input type="radio" name="cashyn" class="cashyn" id="cashno" onchange="cashyesno()">안한다
+			</td>
 		</tr>
 		<tr>			
 			<td>
@@ -285,10 +301,10 @@ function cashyesno() {
 		</tr>
 	</table>
 
-	<button class="paybtn1"><img src="${path}/resources/images/삼성페이.png" alt="" width="120" height="50"></button>
-	<button class="paybtn2"><img src="${path}/resources/images/카카오페이.png" alt=""width="120" height="50"></button>
-	<button class="paybtn3"><img src="${path}/resources/images/네이버페이.jpg" alt=""width="120" height="50"></button>
-	<button class="paybtn4"><img src="${path}/resources/images/제로페이.png" alt=""width="120" height="50"></button>
+	<button class="paybtn" id="paybtn1"><img src="${path}/resources/images/삼성페이.png" alt="" width="120" height="50"></button>
+	<button class="paybtn" id="paybtn2"><img src="${path}/resources/images/카카오페이.png" alt=""width="120" height="50"></button>
+	<button class="paybtn" id="paybtn3"><img src="${path}/resources/images/네이버페이.jpg" alt=""width="120" height="50"></button>
+	<button class="paybtn" id="paybtn4"><img src="${path}/resources/images/제로페이.png" alt=""width="120" height="50"></button>
 	</form>
 	</div>
 <%@ include file="../footer.jsp" %>	

@@ -38,6 +38,7 @@ public class OrderController {
 	//참고 board의 update파일
 	public String sellinsert(@RequestParam(value="sbcode",required = false) List<Integer> sbcodelist,Sell sell,HttpSession session) throws Exception{
 		String userid = (String)session.getAttribute("userid");
+		userid = "root";
 		//결제추가
 		sell.setUserid(userid);
 		sellService.insert(sell);
@@ -52,6 +53,7 @@ public class OrderController {
 	@GetMapping("sdselect")
 	public String selectList(HttpSession session,Model model) throws Exception{
 		String userid = (String)session.getAttribute("userid");
+		userid = "root";
 		//상품내역
 		List<Map<String, Object>> ssdlist = sellService.selectList(userid);
 		model.addAttribute("ssdlist",ssdlist);
@@ -62,6 +64,7 @@ public class OrderController {
 	@GetMapping("sdselectOne")
 	public String selectOne(int scode,String pcode,HttpSession session,Model model) throws Exception {
 		String userid = (String)session.getAttribute("userid");
+		userid = "root";
 		//상품 단일조회
 		Map<String, Object> ssdOne = sellService.selectOne(scode,pcode);
 		model.addAttribute("ssdOne",ssdOne);

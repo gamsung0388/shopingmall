@@ -1,5 +1,5 @@
 package org.spring.my.controller;
-//
+
 import java.util.Date;
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class AnswerController {
 	
 	@Autowired
 	private AnswerService answerService;
-//
+
 	//답글 추가
 	//@ResponseBody : 리턴되는 값(데이터) 자체를 보낼 때
 	@ResponseBody
@@ -38,7 +38,7 @@ public class AnswerController {
 		
 		return "ok";
 	}
-	//
+	
 	//답글 조회
 	//@PathVariable: URL경로에 변수를 넣어주는 것
 	@RequestMapping(value = "/list/{acode}", method = RequestMethod.GET)

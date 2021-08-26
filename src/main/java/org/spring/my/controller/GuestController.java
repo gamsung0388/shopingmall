@@ -59,16 +59,9 @@ public class GuestController {
 		Guest newid;
 		
 		String useemail  =  (String)session.getAttribute("authCode");
-		
-		//logger.info("userid:"+userid);
-		//logger.info("logger:"+guest.toString());
 		newid = guestservice.selectOne(userid);	
-		//System.out.println("newid : "+newid);
-		//System.out.println("guest"+guest);
 		logger.info("useemail : " + useemail);
-		logger.info("emailcode : "+emailcode);
-		
-	
+		logger.info("emailcode : "+ emailcode);
 
 		if(newid!=null) {
 			msg = "아이디 중복 확인";
@@ -79,7 +72,7 @@ public class GuestController {
 		}else if(!useemail.equals(emailcode)){
 			msg = " 이메일 인증번호 확인";
 			logger.info("useemail : " + useemail);
-			logger.info("emailcode : "+emailcode);
+			logger.info("emailcode : "+ emailcode);
 			model.addAttribute("msg",msg);
 			return "guest/join";
 		}else {
@@ -278,9 +271,7 @@ public class GuestController {
 				String authCode = mailSendService.sendAuthMail(email, userid);
 				System.out.println("멍청이");
 			
-			
 				//인증키를 세션에 넣기
-				//key:userid, value : authCode 인 세션생성
 				session.setAttribute("authCode" , authCode);
 				session.setMaxInactiveInterval(60*60*2);
 				return authCode;

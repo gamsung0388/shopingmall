@@ -35,6 +35,7 @@ public class SellBoxServiceimpl implements SellBoxService{
 		if(pcnt==0) {//없다면 장바구니에 추가
 			Map<String, Object> productmap=productDAO.selectOne(sellBox.getPcode());
 			int amount =Integer.parseInt(productmap.get("PRICE").toString())*sellBox.getSellcnt();
+			System.out.println(amount);
 			sellBox.setAmount(amount);
 			sellBoxDAO.insert(sellBox);
 		}else {//있다면 장바구니 수정
