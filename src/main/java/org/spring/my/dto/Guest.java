@@ -2,6 +2,7 @@ package org.spring.my.dto;
 
 import lombok.Data;
 
+//
 @Data
 public class Guest {
 	private String userid;
