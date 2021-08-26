@@ -1,0 +1,10 @@
+diff a/src/main/java/org/spring/my/controller/AnswerController.java b/src/main/java/org/spring/my/controller/AnswerController.java	(rejected hunks)
+@@ -22,7 +22,7 @@
+ 	
+ 	@Autowired
+ 	private AnswerService answerService;
+-
++//
+ 	//답글 추가
+ 	//@ResponseBody : 리턴되는 값(데이터) 자체를 보낼 때
+ 	@ResponseBody
