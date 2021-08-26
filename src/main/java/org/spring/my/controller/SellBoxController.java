@@ -41,7 +41,7 @@ public class SellBoxController {
 	@GetMapping("boxinsert")
 	public String boxinsert(SellBox sellBox,Model model, HttpSession session) throws Exception {
 		String userid = (String)session.getAttribute("userid");
-		userid = "root";
+		//userid = "root";
 		sellBox.setUserid(userid);
 		System.out.println("userid : " +userid);
 		System.out.println(sellBox.toString());
@@ -53,7 +53,7 @@ public class SellBoxController {
 	@GetMapping("boxlist")
 	public String Sellform(Model model,HttpSession session) throws Exception{
 		String userid = (String)session.getAttribute("userid");
-		userid = "root";
+		//userid = "root";
 		//장바구니 물품조회
 		Map<String, Object> sellBoxmap = sellboxService.selectList(userid);
 		logger.info(sellBoxmap.toString());
@@ -66,7 +66,7 @@ public class SellBoxController {
 	@DeleteMapping("Alldelete")
 	public String Alldelete(HttpSession session) throws Exception{
 		String userid = (String)session.getAttribute("userid");
-		userid = "root";
+		//userid = "root";
 		sellboxService.Alldelete(userid);
 		return "delete";
 	}
@@ -75,7 +75,7 @@ public class SellBoxController {
 	@DeleteMapping("delete/{pcode}")
 	public String delete(@PathVariable("pcode") String pcode,HttpSession session) throws Exception{
 		String userid = (String)session.getAttribute("userid");
-		userid = "root";
+		//userid = "root";
 		sellboxService.delete(userid, pcode);
 		return "delete";
 	}
@@ -89,7 +89,7 @@ public class SellBoxController {
 	@GetMapping("orderOne")
 	public String orderOne(@ModelAttribute("sbcode") int sbcode,HttpSession session,Model model) throws Exception{
 		String userid = (String)session.getAttribute("userid");
-		userid = "root";
+		//userid = "root";
 		SellBox sellbox = sellboxService.selectOne(sbcode);
 		Map<String,Object> osmap = sellboxService.orderselectone(userid,sellbox.getPcode());
 		Guest guest = guestService.selectOne(userid);
@@ -106,7 +106,7 @@ public class SellBoxController {
 	@GetMapping("orderList")
 	public String orderList(HttpSession session,Model model) throws Exception{
 		String userid = (String)session.getAttribute("userid");
-		userid = "root";
+		//userid = "root";
 		Map<String,Object> osmap = sellboxService.orderselectList(userid);
 		Guest guest = guestService.selectOne(userid);
 		model.addAttribute("guest",guest);
