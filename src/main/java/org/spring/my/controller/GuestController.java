@@ -31,7 +31,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.sun.mail.iap.Response;
 
 
-
+//테스트
 @Controller
 @RequestMapping("guest")
 public class GuestController {
