@@ -22,7 +22,7 @@ public class AnswerController {
 	
 	@Autowired
 	private AnswerService answerService;
-//
+
 	//답글 추가
 	//@ResponseBody : 리턴되는 값(데이터) 자체를 보낼 때
 	@ResponseBody
