@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Data;
 
+
+//git 테스트
 @Data
 public class Answer {
 	private int asnum;
