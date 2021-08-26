@@ -1,0 +1,89 @@
+@charset "UTF-8";
+
+#trList{
+	vertical-align:top;
+}
+
+#tdList1{
+	width: 350px; 
+	border-right:1px solid black; 
+	text-align: center;
+	background-color: e0e0e0;
+	padding-top: 20px;
+}
+
+#tdList2{
+	padding: 20px 20px;
+	text-align: center;
+	background-color: e0e0e0;
+}
+
+#write{
+	color: black;
+	margin-left: 130px;
+}
+
+#write2{
+	color: black;
+	margin-left: 230px;
+}
+
+#write:hover {
+	color: purple;
+}
+
+#write2:hover{
+	color: purple;
+}
+
+#search{
+	background-color: transparent;
+}
+
+#search:hover{
+	color: purple;
+}
+
+
+#btnList1{
+	padding-right: 600px;
+}
+
+#btnPlus{
+	background-color: transparent;
+	border: 0;
+	outline: 0;
+}
+
+#btnMinus{
+	background-color: transparent;
+	border: 0;
+	outline: 0;
+}
+
+ol{
+   list-style:none;
+}
+
+#curPage{
+	color: 3c737a;
+	font-weight: bolder;
+}
+
+#listTile{
+	margin-left: 330px;
+}
+
+.listSubject:hover{
+	color: blue;
+}
+
+#FileDownload{
+	background-color: transparent;
+	border: 0;
+	outline: 0;
+}
+
+#FileDownload:hover{
+	color: purple;
+}

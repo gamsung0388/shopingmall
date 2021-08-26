@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.spring.my.AskMapper">
+	<insert id="insert">
+		<selectKey keyProperty="acode" resultType="int" order="BEFORE">
+		select ASEQ.nextval from dual
+		</selectKey>
+		insert into ask(acode,userid,passwd,subject,content,gubun,ip) 
+		values(#{acode},#{userid},#{passwd},#{subject},#{content},#{gubun},#{ip})
+	</insert>
+	
+	<sql id="askFind">
+		<if test="findkey == 'gubun'">
+			where gubun like '%' || #{findvalue} || '%'
+		</if>
+		<if test="findkey == 'subject'">
+			where subject like '%' || #{findvalue} || '%'
+		</if>
+		<if test="findkey == 'userid'">
+			where userid like '%' || #{findvalue} || '%'
+		</if>
+	</sql>
+	
+	<!-- 전체 게시물 수 -->
+	<select id="selectTotCnt" resultType="int">
+		select count(*)totcnt from ask
+		<include refid="askFind" />
+	</select>
+	
+	<select id="selectList" resultType="java.util.Map">
+		select a.* from(
+		    select rownum rn, a.* from(
+		        select * from ask
+		        <include refid="askFind" />
+		        order by acode desc) a
+		    ) a
+		where a.rn between #{startNum} and #{endNum}
+	</select>
+	
+	<select id="selectOne" resultType="Ask">
+		select * from ask
+		where acode = #{acode}
+	</select>
+	<delete id="delete">delete ask
+	where acode = #{acode} 
+	</delete>
+</mapper>

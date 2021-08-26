@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.spring.my.NoticeFileMapper">
+
+<insert id="insert">
+		insert into noticefile(fcode,ncode,fname)
+		select noticefile_seq.nextval, nf.* from(
+		<foreach collection="filenamelist" item="filename" index="index" separator="UNION ALL" open="" close="">
+			select #{ncode},#{filename} from dual
+		</foreach>
+		) nf
+</insert>
+
+<select id="selectList" resultType="NoticeFile">
+	select * from noticefile
+	where ncode = #{ncode}
+</select>
+
+<delete id="delete">
+	delete noticefile
+	where ncode = #{ncode}
+</delete>
+
+<delete id="filedelete">
+	delete noticefile
+	where fcode = #{fcode}
+</delete>
+</mapper>

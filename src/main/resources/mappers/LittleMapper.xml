@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.spring.my.LittleMapper">
+	<sql id="find">
+		<if test="findkey=='bcode'">
+			WHERE B.BCODE LIKE '%' || #{findvalue} || '%'
+		</if>
+		<if test="findkey=='lcode'">
+			WHERE lcode LIKE '%' || #{findvalue} || '%'
+		</if>
+	
+		<if test="findkey=='bname'">
+			WHERE bname LIKE '%' || #{findvalue} || '%'
+		</if>
+		<if test="findkey=='lname'">
+			WHERE lname LIKE '%' || #{findvalue} || '%'
+		</if>
+	</sql>
+
+	<insert id="insert">
+		INSERT INTO LITTLE(lcode,lname,bcode) VALUES (#{lcode},#{lname},#{bcode})
+	</insert>
+	
+	<select id="selectTotCnt" resultType="int">
+		SELECT COUNT(*) TOTCNT 
+		FROM LITTLE L JOIN BIG B ON(L.BCODE=B.BCODE)
+		<include refid="find"/>
+	</select>	
+	<select id="selectList" resultType="java.util.Map">
+		SELECT * FROM (
+	        SELECT ROWNUM RN, A.* FROM (
+			SELECT L.LCODE, L.LNAME, B.BCODE, B.BNAME
+			FROM LITTLE L JOIN BIG B ON(L.BCODE=B.BCODE)
+			<include refid="find"/>
+			ORDER BY L.LCODE
+		    ) A)
+		WHERE RN BETWEEN #{startNum} AND #{endNum}
+	</select>
+
+	<delete id="delete">
+		DELETE  FROM LITTLE
+		WHERE LCODE = #{lcode}
+	</delete>
+</mapper>

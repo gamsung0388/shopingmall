@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.spring.my.ProductMapper">
+	<sql id="find">
+		<if test="findkey=='pname'">
+			WHERE pname LIKE '%' || #{findvalue} || '%'
+		</if>
+		<if test="findkey=='pcode'">
+			WHERE pcode LIKE '%' || #{findvalue} || '%'
+		</if>
+		<if test="findkey=='pmaker'">
+			WHERE pmaker LIKE '%' || #{findvalue} || '%'
+		</if>
+		<if test="findkey=='bname'">
+			WHERE bname LIKE '%' || #{findvalue} || '%'
+		</if>
+		<if test="findkey=='lname'">
+			WHERE lname LIKE '%' || #{findvalue} || '%'
+		</if>
+	</sql>
+
+	<insert id="insert">
+		INSERT INTO PRODUCT(PCODE,PNAME,PMAKER,PRICE,PCOLOR,PSIZE,BCODE,LCODE)
+		VALUES (#{pcode},#{pname},#{pmaker},#{price},#{pcolor},#{psize},#{bcode},#{lcode})
+	</insert>
+	
+	<select id="selectTotCnt" resultType="int">
+		SELECT COUNT(*) TOTCNT 
+		FROM PRODUCT P 
+		JOIN LITTLE L ON (P.LCODE = L.LCODE)
+		JOIN BIG B ON (P.BCODE = B.BCODE)
+		<include refid="find"/>
+	</select>
+	
+	<select id="selectList"  resultType="java.util.Map">
+		SELECT * FROM (
+        	SELECT ROWNUM RN, A.* FROM (
+            	SELECT P.PCODE,P.PNAME,P.PRICE,B.BNAME,L.LNAME,PF.FNAME
+            	FROM PRODUCT P 
+            	JOIN LITTLE L ON (P.LCODE = L.LCODE)
+				JOIN BIG B ON (P.BCODE = B.BCODE)
+				JOIN PRODUCTFILE PF ON(P.PCODE=PF.PCODE)
+            	<include refid="find"/>
+            	ORDER BY PCODE
+            ) A)
+		WHERE RN BETWEEN #{startNum} AND #{endNum}
+	</select>
+	<select id="selectOne" resultType="java.util.Map">
+		SELECT *
+        FROM PRODUCT P 
+        JOIN LITTLE L ON (P.LCODE = L.LCODE)
+		JOIN BIG B ON (P.BCODE = B.BCODE)
+		WHERE pcode = #{pcode}
+	</select>
+	
+	<delete id="delete">
+		DELETE  FROM PRODUCT
+		WHERE PCODE = #{pcode}
+	</delete>
+	
+	<update id ="update">
+		UPDATE PRODUCT
+			set pname = #{pname}, 
+			pmaker = #{pmaker},
+			price = #{price},
+			pcolor = #{pcolor},
+			psize = #{psize},
+			bcode = #{bcode},
+			lcode = #{lcode},
+			modifydate = sysdate
+		WHERE pcode = #{pcode}
+	</update>
+	
+</mapper>

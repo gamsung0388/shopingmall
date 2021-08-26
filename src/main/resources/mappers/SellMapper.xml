@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.spring.my.SellMapper">
+ 	<!-- ctrl shift y 소문자 x 대문자 -->
+ 	<!-- 결제추가 -->
+ 	<insert id="insert">
+	 	<selectKey keyProperty="scode" resultType="int" order="BEFORE">
+ 			SELECT SSEQ.NEXTVAL FROM DUAL
+ 		</selectKey>
+ 		INSERT INTO SELL(SCODE,USERID,ORDERER,RECEIVER,PHONE,EMAIL,ZIP,ADDR1,ADDR2,REGDATE)
+		VALUES(${scode},#{userid},#{orderer},#{receiver},#{phone},#{email},#{zip},#{addr1},#{addr2},SYSDATE)
+ 	</insert>
+ 	<!-- 결제내용수정 -->
+ 	<update id="update">
+ 		UPDATE SELL
+		SET RECEIVER = #{receiver},
+		PHONE = #{phone},
+		EMAIL= #{email},
+		ZIP= #{zip},
+		ADDR1= #{addr1},
+		ADDR2= #{addr2},
+		REGDATE = SYSDATE
+		WHERE SCODE = #{scode}
+ 	</update>
+ 	<!-- 결제내용조회 -->
+ 	<select id="selectList" resultType="java.util.Map">
+ 		SELECT PF.FNAME,S.SCODE,SD.PCODE,P.PNAME,P.PCOLOR,P.PSIZE,SD.SELLCNT,SD.AMOUNT
+		FROM SELLDETAIL SD 
+		JOIN PRODUCT P ON(SD.PCODE=P.PCODE)
+		JOIN PRODUCTFILE PF ON (P.PCODE=PF.PCODE)
+		JOIN SELL S ON(SD.SCODE=S.SCODE)
+		WHERE S.USERID = #{userid}
+ 	</select>
+	<!-- 결제상세내용조회 --> 	
+	<select id="selectOne" resultType="java.util.Map">
+ 		SELECT PF.FNAME,S.SCODE,P.PCODE,S.ORDERER,S.RECEIVER,S.PHONE,S.EMAIL,S.ZIP,S.ADDR1,S.ADDR2,P.PNAME,P.PMAKER,P.PSIZE,P.PCOLOR,S.REGDATE,SD.PCODE,SD.SELLCNT,SD.AMOUNT,L.LNAME,B.BNAME FROM SELL S
+		JOIN SELLDETAIL SD ON(S.SCODE=SD.SCODE)
+		JOIN PRODUCT P ON (SD.PCODE=P.PCODE)
+		JOIN BIG B ON(P.BCODE=B.BCODE)
+		JOIN PRODUCTFILE PF ON(P.PCODE=PF.PCODE)
+		JOIN LITTLE L ON(L.LCODE=P.LCODE)
+		WHERE S.SCODE = #{scode}
+		AND P.PCODE=	#{pcode}
+ 	</select>
+ 	
+ 	
+ 	
+</mapper>

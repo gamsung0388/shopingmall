@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.spring.my.NoticeMapper">
+<insert id="insert">
+	<selectKey keyProperty="ncode" resultType="int" order="BEFORE" >
+		select nseq.nextval from dual
+	</selectKey>
+		insert into notice(ncode,userid,subject,content,ip) 
+		values(#{ncode},#{userid},#{subject},#{content},#{ip})
+</insert>
+
+<sql id="find">
+	<if test="findkey == 'subject'">
+		where subject like '%' || #{findvalue} || '%'
+	</if>
+	<if test="findkey == 'userid'">
+		where userid like '%' || #{findvalue} || '%'
+	</if>
+</sql>
+
+<!-- 전체 게시물 수 -->
+<select id="selectTotCnt" resultType="int">
+	select count(*)totcnt from notice
+	<include refid="find" />
+</select>
+
+<select id="selectList" resultType="java.util.Map">
+	select n.* from(
+	    select rownum rn, n.* from(
+	        select * from notice
+	        <include refid="find" />
+	        order by ncode desc) n
+	    ) n
+	where n.rn between #{startNum} and #{endNum}
+</select>
+
+<select id="selectOne" resultType="Notice">
+	select * from notice
+	where ncode = #{ncode}
+</select>
+
+<update id="update">
+	update notice
+	set subject = #{subject},
+	content = #{content},
+	ip = #{ip},
+	modifydate = sysdate
+	where ncode = #{ncode}
+</update>
+
+<delete id="delete">
+	delete notice
+	where ncode = #{ncode}
+</delete>
+
+
+</mapper>

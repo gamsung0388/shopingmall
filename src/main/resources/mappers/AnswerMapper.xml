@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.spring.my.AnswerMapper">
+<insert id="insert">
+	insert into answer(asnum,acode,userid,content,restep,relevel,ip) 
+	values(asseq.nextval,#{acode},#{userid},#{content},#{restep},#{relevel},#{ip})
+</insert>
+
+<select id="selectList" resultType="Answer">
+	select * from answer
+	where acode = #{acode}
+</select>
+
+<delete id="delete">
+	delete answer
+	where acode = #{acode}
+</delete>
+</mapper>

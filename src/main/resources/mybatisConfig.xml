@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+<!--널값 허용-->
+<settings>
+	<setting name="jdbcTypeForNull" value="NULL"/>
+</settings>
+<!--DTO에 대한 별명-->
+	<typeAliases>
+		<typeAlias type="org.spring.my.dto.Guest" alias="Guest"/>
+		<typeAlias type="org.spring.my.dto.Answer" alias="Answer"/>
+		<typeAlias type="org.spring.my.dto.Ask" alias="Ask"/>
+		<typeAlias type="org.spring.my.dto.AskFile" alias="AskFile"/>
+		<typeAlias type="org.spring.my.dto.AskUserManager" alias="AskUserManager"/>
+		<typeAlias type="org.spring.my.dto.NoticeFile" alias="NoticeFile"/>
+		<typeAlias type="org.spring.my.dto.Notice" alias="Notice"/>
+		<typeAlias type="org.spring.my.dto.NoticeUserManager" alias="NoticeUserManager"/>
+		<typeAlias type="org.spring.my.dto.Sell" alias="Sell"/>
+		<typeAlias type="org.spring.my.dto.SellBox" alias="SellBox"/>
+		<typeAlias type="org.spring.my.dto.ProductFile" alias="ProductFile"/>
+		<typeAlias type="org.spring.my.dto.Big" alias="Big"/>
+		<typeAlias type="org.spring.my.dto.Little" alias="Little"/>
+	</typeAliases>
+	
+
+</configuration>

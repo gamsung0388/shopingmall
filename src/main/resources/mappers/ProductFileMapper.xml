@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.spring.my.ProductFileMapper">
+	<insert id="insertBoardFiles" >
+		<selectKey keyProperty="fcode" resultType="int" order="BEFORE">
+ 			SELECT PFSEQ.NEXTVAL FROM DUAL
+ 		</selectKey>
+		INSERT into PRODUCTFILE(fcode, pcode, fname)
+			SELECT ${fcode}, f.* FROM (
+	 		<foreach collection="filenamelist" item="fname" index="index" separator="UNION ALL" open="" close="">
+				SELECT #{pcode}, #{fname} FROM dual
+			</foreach>
+		) f
+	</insert>
+	
+	<select id="selectList" resultType="ProductFile">
+		SELECT * FROM PRODUCTFILE
+		WHERE pcode = #{pcode}
+	</select>
+	
+	<delete id="delete">
+		DELETE FROM PRODUCTFILE
+		WHERE fcode = #{fcode}
+	</delete>
+	
+	<delete id="deleteAll">
+		DELETE FROM PRODUCTFILE
+		WHERE pcode = #{pcode}
+	</delete>
+</mapper>
